@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">MobileApps2025-2301321082</string>
+    <string name="app_name">MobileApps2025-ТВОЯ_ФН</string>
+
+    <string-array name="priorities">
+        <item>Нисък (Low)</item>
+        <item>Среден (Medium)</item>
+        <item>Висок (High)</item>
+    </string-array>
 </resources>
