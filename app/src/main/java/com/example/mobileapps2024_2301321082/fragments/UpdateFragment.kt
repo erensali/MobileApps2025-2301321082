@@ -39,7 +39,9 @@ class UpdateFragment : Fragment() {
         }
 
 
-        setHasOptionsMenu(true)
+        binding.btnDelete.setOnClickListener {
+            deleteUser()
+        }
 
         return binding.root
     }
@@ -50,17 +52,12 @@ class UpdateFragment : Fragment() {
         val priority = binding.spinnerUpdatePriority.selectedItemPosition + 1
 
         if (inputCheck(title, description)) {
-
             val updatedTask = Task(args.currentTask.id, title, description, priority)
-
-
             mTaskViewModel.updateTask(updatedTask)
-
-            Toast.makeText(requireContext(), "Успешна редакция!", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(requireContext(), "Успешно обновено!", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_taskListFragment)
         } else {
-            Toast.makeText(requireContext(), "Попълнете всички полета.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Попълнете всички полета", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -69,27 +66,16 @@ class UpdateFragment : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete) {
-            deleteUser()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun deleteUser() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Да") { _, _ ->
             mTaskViewModel.deleteTask(args.currentTask)
-            Toast.makeText(requireContext(), "Изтрито: ${args.currentTask.title}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Успешно изтрито!", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_taskListFragment)
         }
         builder.setNegativeButton("Не") { _, _ -> }
-        builder.setTitle("Изтриване на ${args.currentTask.title}?")
-        builder.setMessage("Сигурни ли сте, че искате да изтриете тази задача?")
+        builder.setTitle("Изтриване на задача?")
+        builder.setMessage("Сигурни ли сте, че искате да изтриете '${args.currentTask.title}'?")
         builder.create().show()
     }
 

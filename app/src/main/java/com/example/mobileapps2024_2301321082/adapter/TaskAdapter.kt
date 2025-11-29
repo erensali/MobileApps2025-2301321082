@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileapps2024_2301321082.R
 import com.example.mobileapps2024_2301321082.data.Task
+import com.example.mobileapps2024_2301321082.fragments.TaskListFragmentDirections
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
 
@@ -42,18 +43,23 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
         when(currentItem.priority) {
             1 -> {
                 holder.priority.text = "Low"
-                holder.priority.setTextColor(Color.parseColor("#00FF00")) // Зелено
+                holder.priority.setTextColor(Color.parseColor("#00FF00"))
             }
-
             2 -> {
                 holder.priority.text = "Medium"
-                holder.priority.setTextColor(Color.parseColor("#FFC107")) // Жълто
+                holder.priority.setTextColor(Color.parseColor("#FFC107"))
             }
-
             3 -> {
                 holder.priority.text = "High"
                 holder.priority.setTextColor(Color.RED)
             }
+        }
+
+
+        holder.rowLayout.setOnClickListener {
+
+            val action = TaskListFragmentDirections.actionTaskListFragmentToUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
         }
     }
 
