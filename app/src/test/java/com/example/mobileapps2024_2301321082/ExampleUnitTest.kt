@@ -1,17 +1,28 @@
 package com.example.mobileapps2024_2301321082
 
+import com.example.mobileapps2024_2301321082.data.Task
 import org.junit.Test
-
 import org.junit.Assert.*
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
+class TaskUnitTest {
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun checkTaskPriorityLogic() {
+
+        val highTask = Task(1, "Важна задача", "Спешно!", 3)
+
+
+        val lowTask = Task(2, "Лека задача", "Не е спешно", 1)
+
+
+        assertTrue("High priority should be greater than Low", highTask.priority > lowTask.priority)
+    }
+
+    @Test
+    fun checkTaskTitleStorage() {
+        val title = "Купи хляб"
+        val task = Task(0, title, "Черен", 2)
+
+        assertEquals(title, task.title)
     }
 }
