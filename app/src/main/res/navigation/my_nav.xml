@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/taskListFragment">
+
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.example.mobileapps2024_2301321082.fragments.TaskListFragment"
+        android:label="Списък задачи"
+        tools:layout="@layout/fragment_task_list">
+        <action
+            android:id="@+id/action_taskListFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.mobileapps2024_2301321082.fragments.AddFragment"
+        android:label="Добави задача"
+        tools:layout="@layout/fragment_add">
+        <action
+            android:id="@+id/action_addFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.mobileapps2024_2301321082.fragments.UpdateFragment"
+        android:label="Редакция"
+        tools:layout="@layout/fragment_update">
+        <action
+            android:id="@+id/action_updateFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+        <argument
+            android:name="currentTask"
+            app:argType="com.example.mobileapps2024_2301321082.data.Task" />
+    </fragment>
+</navigation>
